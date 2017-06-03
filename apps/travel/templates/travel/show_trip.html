@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>View Trip</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static '/login/css/stylesheet.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="nav-bar">
+            <a href= '{% url "travel_ns:travel_index" %}' id="link">Home</a>
+            <a href="{% url 'travel_ns:logout' %}">Logout</a>
+        </div>
+
+
+        <div class="destination-info">   
+            <h1>{{trip.destination}}</h1>
+            <ul>  
+                <li>Planned By: {{trip.created_by.first_name}}</li>
+                <li>Description: {{trip.plan}}</li>
+                <li>Travel Date From: {{trip.start_date}}</li>
+                <li>Travel Date To: {{trip.end_date}}</li>
+            </ul>
+        </div>
+        <div class="destination-joining">
+            <h2>Other users' joining the trip:</h2>
+            
+            <ul>
+                {% for user in wishers %}
+                    <li>{{user.first_name}}</li>
+                {% endfor %}
+            </ul>
+        </div>                        
+            
+        </div>
+   </div>
+    
+</body>
+
+</html>
+

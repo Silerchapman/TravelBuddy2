@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Schedule Trip</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static '/login/css/stylesheet.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="nav-bar">
+            <a href= '{% url "travel_ns:travel_index" %}' id="link">Home</a>
+            <a href="{% url 'travel_ns:logout' %}">Logout</a>
+        </div>
+
+          <div class="error">
+            <ul>
+            {% for idx in messages %}
+                <li>{{ idx}}</li>
+            {% endfor %}
+            </ul>
+        </div>
+                
+        <div class="contentBox">
+            <form class="boxes" action= '{% url "travel_ns:create" %}' method='POST'>
+                    {% csrf_token %} 
+                <h1>Create a New Trip!</h1>
+                <hr>
+                <h4>Destination: </h4><input type="text" name="item_name">
+                <h4>Description: </h4><input type="text" name="trip_description">
+                <h4>Start Date: <input type="date" name="start_date">
+                <h4>End Date: <input type="date" name="end_date">
+              
+                <input type="submit" value="Add!">
+                        
+             </form>
+        </div>      
+   </div>
+    
+</body>
+
+</html>

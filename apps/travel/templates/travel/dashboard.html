@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>Travel Dashboard</title>
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static '/login/css/stylesheet.css' %}" media="screen" charset="utf-8">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+                <div class="nav-bar">
+                    <a href="{% url 'travel_ns:logout' %}">Logout</a>
+                </div>
+            <h1>Hello, {{all_data.current_user.first_name}}!</h1>
+        </div>
+
+        
+                
+        <h2>Your Trip Schedules</h2>
+            <table>
+                <tr>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Plan</th>
+                </tr>
+                {% for user_trip in all_data.wishlist %}
+                <tr>
+                    <td><a href='{% url "travel_ns:view" user_trip.id %}'>{{user_trip.destination}}</a> </td>
+                    <td>{{user_trip.start_date}}</td>
+                    <td>{{user_trip.end_date}}</td>
+                    <td>{{user_trip.plan}}</td>
+                </tr>
+                   
+                {% endfor %}
+            </table>
+            
+        <h2>Other User's Travel Plans</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Want You want to Join?</th>
+            </tr>
+            {% for other_trips in all_data.other_wishlist %}
+            <tr>
+                <td>{{other_trips.created_by.first_name}} </td>
+                <td>{{other_trips.destination}} </td>
+                <td>{{other_trips.start_date}}</td>
+                <td>{{other_trips.end_date}}</td>
+                <td>
+                    <a href="{% url 'travel_ns:add_wishlist' item_id=other_trips.id %}">Join</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="nav-bar">
+            <a href= '{% url "travel_ns:add" %}' id="link">Add Travel Plan</a>
+        </div>
+       
+        
+   </div>
+    
+</body>
+
+</html>
